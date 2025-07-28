@@ -1,0 +1,7 @@
+{
+  "translationFilePathTemplate": "locales/{lang}/onboarding.json",
+  "baseLocale": "de",
+  "targetLocales": ["en", "it"],
+  "sortTarget": true,
+  "cleanTarget": false
+}
