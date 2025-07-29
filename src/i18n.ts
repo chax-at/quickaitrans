@@ -1,6 +1,7 @@
 import { askChatGpt } from './AiHelper';
 
 export type TranslationRecord = { [key: string]: string | TranslationRecord };
+export type TranslationMap = Map<string, TranslationMap | string>;
 
 export interface ILanguageOptions {
   baseLanguageCode: string;
