@@ -5,7 +5,7 @@
   "scripts": {
     "test": "vitest",
     "lint": "oxlint src",
-    "build:cli": "rolldown src/main.ts  -d bin -f cjs -m"
+    "build:cli": "rolldown -c rolldown.config.ts"
   },
   "author": "",
   "license": "ISC",

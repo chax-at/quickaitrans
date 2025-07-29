@@ -20,7 +20,8 @@ const configFileSchema = object({
   baseLocale: string().min(1),
   targetLocales: array(string().min(1)),
   sortTarget: boolean().default(true),
-  cleanTarget: boolean().default(true)
+  cleanTarget: boolean().default(true),
+  appInfo: string().optional()
 });
 export type ConfigFile = z.infer<typeof configFileSchema>;
 
@@ -79,7 +80,8 @@ async function main() {
       translated = await translate({
         sourceLanguage: baseLocale,
         destinationLanguage: targetLocale,
-        source: translationMapToRecord(diff)
+        source: translationMapToRecord(diff),
+        appInfo: config.appInfo,
       });
 
       console.log(
@@ -101,7 +103,7 @@ async function main() {
     // console.log(newTranslation);
     await fs.writeFile(
       targetLanguageFilePath,
-      translationMapToJson(newTranslation, 2, 0)
+      `${translationMapToJson(newTranslation, 2, 0)}\n`
     );
   }
 }

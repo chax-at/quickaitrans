@@ -13,11 +13,13 @@ export async function translate({
   sourceLanguage,
   destinationLanguage,
   breadcrumbs = [],
+  appInfo = '',
 }: {
   source: TranslationRecord;
   sourceLanguage: string;
   destinationLanguage: string;
   breadcrumbs?: Array<string>;
+  appInfo?: string;
 }): Promise<TranslationRecord> {
   let innerTranslation: TranslationRecord = {};
   const maxChunkSize = 4000;
@@ -30,7 +32,7 @@ export async function translate({
       return;
     }
     try {
-      const prompt = decorateWithPrompt(JSON.stringify(currentChunk), 'JSON', sourceLanguage, destinationLanguage);
+      const prompt = decorateWithPrompt(JSON.stringify(currentChunk), 'JSON', sourceLanguage, destinationLanguage, appInfo);
       const chatGptAnswer = await askChatGpt({
         maxTokens: 4000,
         messages: [
@@ -99,9 +101,11 @@ function decorateWithPrompt(
   content: string,
   format: string,
   baseLanguageCode: string,
-  desiredLanguageCode: string
+  desiredLanguageCode: string,
+  appInfo?: string
 ): string {
   return `You are now a translator for an app."\n
+${appInfo ? `${appInfo}\n` : ''}
 \n
 Please translate this ${format} from "${baseLanguageCode}" to "${desiredLanguageCode}":\n\`\`\`\n${content}\n\`\`\`\nOnly type the result itself.\nDo not translate the keys.`;
 }
