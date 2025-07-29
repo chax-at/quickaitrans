@@ -10,7 +10,7 @@ Create a configuration file `.quickaitrans.json` in the format:
   "translationFilePathTemplate": "locales/{lang}/translation.json",
   "baseLocale": "en",
   "targetLocales": ["de","it"],
-  "appInfo": "Optional info about your app to help with the autmatic translation"
+  "appInfo": "Optional info about your app to help with the automatic translation"
 }
 ```
 

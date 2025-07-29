@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import type z from 'zod';
-import { array, boolean, object, string } from 'zod';
+import { array, object, string } from 'zod';
 import { translate, type TranslationMap, type TranslationRecord } from './i18n';
 import {
   parseJsonWithOrder,
