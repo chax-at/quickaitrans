@@ -2,18 +2,18 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import type z from 'zod';
 import { array, object, string } from 'zod';
-import { translate, type TranslationMap, type TranslationRecord } from './i18n';
+import { translate, type TranslationMap, type TranslationRecord } from './i18n.js';
 import {
   parseJsonWithOrder,
   translationMapToRecord
-} from './parseJsonWithOrder';
+} from './parseJsonWithOrder.js';
 import {
   diffTranslationMaps,
   insertValuesFromBToA,
   mergeTranslationMaps,
   translationRecordToMap
-} from './translationMapHelpers';
-import { translationMapToJson } from './translationMapToJson';
+} from './translationMapHelpers.js';
+import { translationMapToJson } from './translationMapToJson.js';
 
 const configFileSchema = object({
   translationFilePathTemplate: string().min(1),
@@ -26,7 +26,9 @@ export type ConfigFile = z.infer<typeof configFileSchema>;
 async function main() {
   const configFilePath = process.argv[2] ?? '.quickaitrans.json';
   const configFileContent = await fs.readFile(configFilePath, 'utf-8');
-  const config = JSON.parse(configFileContent);
+  const configJSON = JSON.parse(configFileContent);
+
+  const config = configFileSchema.parse(configJSON);
 
   const translationFilePathTemplate = config.translationFilePathTemplate;
   const baseLocale = config.baseLocale;

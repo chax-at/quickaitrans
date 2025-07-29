@@ -1,4 +1,4 @@
-import type { TranslationMap } from './i18n';
+import type { TranslationMap } from './i18n.js';
 
 export function translationMapToJson(
   map: TranslationMap,

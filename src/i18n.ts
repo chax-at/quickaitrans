@@ -1,4 +1,4 @@
-import { askChatGpt } from './AiHelper';
+import { askChatGpt } from './AiHelper.js';
 
 export type TranslationRecord = { [key: string]: string | TranslationRecord };
 export type TranslationMap = Map<string, TranslationMap | string>;

@@ -1,4 +1,4 @@
-import type { TranslationMap, TranslationRecord } from './i18n';
+import type { TranslationMap, TranslationRecord } from './i18n.js';
 
 export function diffTranslationMaps(
   A: TranslationMap,

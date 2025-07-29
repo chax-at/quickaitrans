@@ -1,11 +1,20 @@
 {
   "name": "quickaitrans",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
+  "main": "./dist/main.js",
+  "type": "module",
   "scripts": {
     "test": "vitest",
     "lint": "oxlint src",
-    "build:cli": "rolldown -c rolldown.config.ts"
+    "build": "tsdown",
+    "build:bundle": "rolldown -c rolldown.config.ts"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "bin": {
+    "quickaitrans": "./dist/main.js"
   },
   "author": "",
   "license": "ISC",

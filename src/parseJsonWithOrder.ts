@@ -1,5 +1,5 @@
 import clarinet from 'clarinet';
-import type { TranslationMap, TranslationRecord } from './i18n';
+import type { TranslationMap, TranslationRecord } from './i18n.js';
 
 export function parseJsonWithOrder(json: string): TranslationMap {
   const parser = clarinet.parser();

@@ -1,5 +1,8 @@
 node_modules/
 bin/
+dist/
 locales/
+.vscode/
 .env
 .quickaitrans.json
+*.tgz
