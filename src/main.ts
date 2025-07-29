@@ -19,8 +19,6 @@ const configFileSchema = object({
   translationFilePathTemplate: string().min(1),
   baseLocale: string().min(1),
   targetLocales: array(string().min(1)),
-  sortTarget: boolean().default(true),
-  cleanTarget: boolean().default(true),
   appInfo: string().optional()
 });
 export type ConfigFile = z.infer<typeof configFileSchema>;
@@ -33,8 +31,6 @@ async function main() {
   const translationFilePathTemplate = config.translationFilePathTemplate;
   const baseLocale = config.baseLocale;
   const targetLocales = config.targetLocales;
-  const sortTarget = config.sortTarget;
-  const cleanTarget = config.cleanTarget;
 
   const sourceLanguageFilePath = translationFilePathTemplate.replace(
     '{lang}',
@@ -43,11 +39,6 @@ async function main() {
 
   const sourceFileContent = await fs.readFile(sourceLanguageFilePath, 'utf-8');
   const sourceRecords = parseJsonWithOrder(sourceFileContent);
-
-  // console.log(
-  //   `Source language file loaded from ${sourceLanguageFilePath}:`,
-  //   sourceRecords
-  // );
 
   for (const targetLocale of targetLocales) {
     const targetLanguageFilePath = translationFilePathTemplate.replace(
@@ -86,8 +77,8 @@ async function main() {
 
       console.log(
         `Translated records from ${baseLocale} to ${targetLocale}:`,
-        translated
       );
+      console.dir(translated, { depth: 10, colors: true });
     } else {
       console.log(
         `No differences found between ${baseLocale} and ${targetLocale}.`
@@ -100,7 +91,6 @@ async function main() {
     );
     newTranslation = insertValuesFromBToA(sourceRecords, newTranslation);
 
-    // console.log(newTranslation);
     await fs.writeFile(
       targetLanguageFilePath,
       `${translationMapToJson(newTranslation, 2, 0)}\n`
