@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "./dist/main.js",
   "type": "module",
+  "repository": "github:chax-at/quickaitrans",
   "scripts": {
     "test": "vitest",
     "lint": "oxlint src",
