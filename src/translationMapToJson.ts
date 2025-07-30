@@ -3,7 +3,7 @@ import type { TranslationMap } from './i18n.js';
 export function translationMapToJson(
   map: TranslationMap,
   indent: number = 2,
-  level: number = 0
+  level: number = 0,
 ): string {
   const entries = Array.from(map.entries());
   const pad = (n: number) => ' '.repeat(n);
@@ -14,7 +14,7 @@ export function translationMapToJson(
       result += translationMapToJson(
         value as TranslationMap,
         indent,
-        level + 1
+        level + 1,
       );
     } else {
       result += JSON.stringify(value);

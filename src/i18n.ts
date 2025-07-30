@@ -32,7 +32,13 @@ export async function translate({
       return;
     }
     try {
-      const prompt = decorateWithPrompt(JSON.stringify(currentChunk), 'JSON', sourceLanguage, destinationLanguage, appInfo);
+      const prompt = decorateWithPrompt(
+        JSON.stringify(currentChunk),
+        'JSON',
+        sourceLanguage,
+        destinationLanguage,
+        appInfo,
+      );
       const chatGptAnswer = await askChatGpt({
         maxTokens: 4000,
         messages: [
@@ -44,7 +50,10 @@ export async function translate({
       });
       // const chatGptAnswer = JSON.stringify(currentChunk);
       const gptObject = JSON.parse(chatGptAnswer).choices[0].message.content;
-      innerTranslation = { ...innerTranslation, ...JSON.parse(gptObject.replace(/```json/g, '').replace(/```/g, '')) };
+      innerTranslation = {
+        ...innerTranslation,
+        ...JSON.parse(gptObject.replace(/```json/g, '').replace(/```/g, '')),
+      };
     } catch (e) {
       console.error('Parse Error', e);
     }
@@ -102,7 +111,7 @@ function decorateWithPrompt(
   format: string,
   baseLanguageCode: string,
   desiredLanguageCode: string,
-  appInfo?: string
+  appInfo?: string,
 ): string {
   return `You are now a translator for an app."\n
 ${appInfo ? `${appInfo}\n` : ''}

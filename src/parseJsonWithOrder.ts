@@ -29,7 +29,7 @@ export function parseJsonWithOrder(json: string): TranslationMap {
       stack[stack.length - 1].set(currentKey, value);
     } else {
       throw new Error(
-        `Invalid value for key '${currentKey}': Only strings or nested maps are allowed.`
+        `Invalid value for key '${currentKey}': Only strings or nested maps are allowed.`,
       );
     }
   };

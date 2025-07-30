@@ -55,8 +55,15 @@ const config: OpenAIAzureClientConfig = {
   version: process.env.AI_API_VERSION,
 };
 
-if (config.apiKey == null || config.deployment == null || config.host == null || config.version == null) {
-  console.log('No AI Config present, you can use these keys in your .env file:');
+if (
+  config.apiKey == null ||
+  config.deployment == null ||
+  config.host == null ||
+  config.version == null
+) {
+  console.log(
+    'No AI Config present, you can use these keys in your .env file:',
+  );
   console.log(`
   AI_API_KEY=
   AI_DEPLOYMENT=
@@ -75,7 +82,9 @@ const axios = new Axios({
   },
 });
 
-export async function askChatGpt(options: IAIClientChatCompletionOptions): Promise<string> {
+export async function askChatGpt(
+  options: IAIClientChatCompletionOptions,
+): Promise<string> {
   for (let i = 0; i < 10; i++) {
     const response = await axios.post(
       `/openai/deployments/${config.deployment}/chat/completions?api-version=${config.version}`,
@@ -83,11 +92,16 @@ export async function askChatGpt(options: IAIClientChatCompletionOptions): Promi
         messages: options.messages,
         max_tokens: options.maxTokens,
         stop: options.stop,
-      })
+      }),
     );
 
     if (response.status !== 200) {
-      console.warn('GPT API Error:', response.status, response.statusText, response.data);
+      console.warn(
+        'GPT API Error:',
+        response.status,
+        response.statusText,
+        response.data,
+      );
       if (response.status === 429) {
         await new Promise((res) => setTimeout(res, 10000));
       } else {

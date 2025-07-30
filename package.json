@@ -1,5 +1,5 @@
 {
-  "name": "quickaitrans",
+  "name": "@chax-at/quickaitrans",
   "version": "0.0.1",
   "main": "./dist/main.js",
   "type": "module",
@@ -7,6 +7,9 @@
     "test": "vitest",
     "lint": "oxlint src",
     "build": "tsdown",
+    "stylecheck": "prettier src --check",
+    "stylecheck:fix": "prettier src --write",
+    "prepare": "oxlint src && tsdown",
     "build:bundle": "rolldown -c rolldown.config.ts"
   },
   "files": [
@@ -16,8 +19,8 @@
   "bin": {
     "quickaitrans": "./dist/main.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "chax.at - Challenge Accepted",
+  "license": "MIT",
   "description": "",
   "devDependencies": {
     "@types/clarinet": "^0.12.3",

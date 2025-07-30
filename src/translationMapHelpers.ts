@@ -2,7 +2,7 @@ import type { TranslationMap, TranslationRecord } from './i18n.js';
 
 export function diffTranslationMaps(
   A: TranslationMap,
-  B: TranslationMap
+  B: TranslationMap,
 ): TranslationMap {
   const result = new Map<string, TranslationMap | string>();
   for (const [key, aVal] of A.entries()) {
@@ -26,7 +26,7 @@ export function diffTranslationMaps(
 
 export function mergeTranslationMaps(
   A: TranslationMap,
-  B: TranslationMap
+  B: TranslationMap,
 ): TranslationMap {
   const result = new Map<string, TranslationMap | string>(A);
   for (const [key, bVal] of B.entries()) {
@@ -42,7 +42,7 @@ export function mergeTranslationMaps(
 
 export function insertValuesFromBToA(
   A: TranslationMap,
-  B: TranslationMap
+  B: TranslationMap,
 ): TranslationMap {
   const result = new Map<string, TranslationMap | string>();
   for (const [key, aVal] of A.entries()) {
@@ -66,7 +66,7 @@ export function insertValuesFromBToA(
 export function sortTranslationMapKeys(map: TranslationMap): TranslationMap {
   const sorted = new Map<string, TranslationMap | string>();
   const keys = Array.from(map.keys()).sort((a, b) =>
-    a.localeCompare(b, undefined, { sensitivity: 'base' })
+    a.localeCompare(b, undefined, { sensitivity: 'base' }),
   );
   for (const key of keys) {
     const val = map.get(key);
