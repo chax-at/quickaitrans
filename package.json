@@ -17,7 +17,7 @@
     "src"
   ],
   "bin": {
-    "quickaitrans": "./dist/main.js"
+    "quickaitrans": "dist/main.js"
   },
   "author": "chax.at - Challenge Accepted",
   "license": "MIT",
